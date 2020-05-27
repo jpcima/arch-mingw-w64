@@ -13,7 +13,8 @@ arch=('any')
 url="https://cairographics.org"
 license=('LGPL' 'MPL')
 depends=('mingw-w64-pixman'
-         'mingw-w64-libpng')
+         'mingw-w64-libpng'
+         'mingw-w64-freetype2')
 makedepends=('mingw-w64-configure')
 conflicts=("${pkgname}-bootstrap")
 replaces=("${pkgname}-bootstrap")
@@ -52,7 +53,7 @@ build() {
       --disable-xlib \
       --disable-xcb \
       --disable-fc \
-      --disable-ft \
+      --enable-ft \
       --disable-pdf \
       --enable-ps \
       --disable-svg \
