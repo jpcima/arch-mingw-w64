@@ -10,18 +10,10 @@ license=('LGPL')
 makedepends=('mingw-w64-configure')
 depends=('mingw-w64-flac' 'mingw-w64-libvorbis' 'mingw-w64-crt')
 options=('staticlibs' '!strip' '!buildflags')
-source=("http://www.mega-nerd.com/libsndfile/files/libsndfile-${pkgver}.tar.gz"
-        'libsndfile-1.0.28-fix-pkgconfig.diff')
-sha256sums=('1ff33929f042fa333aed1e8923aa628c3ee9e1eb85512686c55092d1e5a9dfa9'
-            'd2c031c4b542e640add086e1f375630c1fbc919c820ded5ffe8ec98241b7ae60')
+source=(http://www.mega-nerd.com/libsndfile/files/libsndfile-${pkgver}.tar.gz)
+sha256sums=('1ff33929f042fa333aed1e8923aa628c3ee9e1eb85512686c55092d1e5a9dfa9')
 
 _architectures="i686-w64-mingw32 x86_64-w64-mingw32"
-
-prepare() {
-  cd "${srcdir}/libsndfile-${pkgver}"
-  patch -Np1 -i "${srcdir}/libsndfile-1.0.28-fix-pkgconfig.diff"
-  autoreconf -f -i
-}
 
 build() {
   cd "${srcdir}/libsndfile-${pkgver}"
@@ -41,7 +33,6 @@ package() {
     rm "$pkgdir"/usr/${_arch}/bin/*.exe
     ${_arch}-strip --strip-unneeded "$pkgdir"/usr/${_arch}/bin/*.dll
     ${_arch}-strip -g "$pkgdir"/usr/${_arch}/lib/*.a
-    chmod 644 "$pkgdir"/usr/${_arch}/lib/*.a
   done
 }
 
