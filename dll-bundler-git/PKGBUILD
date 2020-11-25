@@ -1,7 +1,7 @@
 # Maintainer: Jean Pierre Cimalando <jp-dev@inbox.ru>
 pkgname=dll-bundler-git
 _pkgname=dll-bundler
-pkgver=0.1.r0.gc219024
+pkgver=0.2.r3.g146c532
 pkgrel=1
 epoch=
 pkgdesc="Deployment helper which copies DLL dependencies next to the Win32 executable"
