@@ -15,7 +15,7 @@ options=(staticlibs '!strip' '!buildflags')
 
 prepare() {
   cd "${srcdir}/SDL2-${pkgver}"
-  sed -i 's/@libdir@\/libSDL2\.so/@bindir@\/SDL2.dll/' sdl2-config.cmake.in
+  sed -i 's:IMPORTED_LOCATION "@libdir@/libSDL2\.so":IMPORTED_LOCATION "@bindir@/SDL2.dll" IMPORTED_IMPLIB "@libdir@/libSDL2.dll.a":' sdl2-config.cmake.in
 }
 
 build() {
