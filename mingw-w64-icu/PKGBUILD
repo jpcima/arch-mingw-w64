@@ -45,7 +45,7 @@ build() {
   make
   popd
   for _arch in ${_architectures}; do
-    mkdir build-${_arch} && pushd build-${_arch}
+    mkdir -p build-${_arch} && pushd build-${_arch}
     ${_arch}-configure \
       --with-cross-build=${PWD}/../nativebuild \
       --with-data-packaging=library \
@@ -68,6 +68,11 @@ package() {
     find "${pkgdir}/usr/${_arch}" -name '*.a' -o -name '*.dll' | xargs ${_arch}-strip -g
     ln -s "/usr/${_arch}/bin/icu-config" "${pkgdir}/usr/bin/${_arch}-icu-config"
   done
+
+  # workaround for bad installation
+  mv -f "${pkgdir}/usr/i686-w64-mingw32/bin/libicudt.a" "${pkgdir}/usr/i686-w64-mingw32/lib/libicudt.a"
+  mv -f "${pkgdir}/usr/i686-w64-mingw32/bin/libicudt68.dll" "${pkgdir}/usr/i686-w64-mingw32/bin/icudt68.dll"
+  mv -f "${pkgdir}/usr/x86_64-w64-mingw32/bin/icudt.a" "${pkgdir}/usr/x86_64-w64-mingw32/lib/libicudt.a"
 }
 
 # vim:set ts=2 sw=2 et:
