@@ -44,6 +44,11 @@ package() {
     for _arch in ${_architectures}; do
         pushd build-${_arch}
         make DESTDIR="${pkgdir}" install
+
+        # fix the dll file being copied at the wrong location
+        mkdir -p "${pkgdir}/usr/${_arch}/bin"
+        mv -f "${pkgdir}/usr/${_arch}/"{lib,bin}"/libsoundio.dll"
+
         popd
     done
 }
